@@ -18,11 +18,11 @@ namespace Blazing.DotNet.Tweets.Client.Pages
         protected readonly List<TweetResult> Tweets = new List<TweetResult>();
         protected readonly ISet<string> Tracks = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
+            "#aspnetcore",
             "#SignalR",
-            "#BlazoR",
+            "#Blazor",
             "#DeveloperCommunity",
-            "@dotnet",
-            "@davidpine7"
+            "@david_xavier_"
         };
 
         [Inject]
