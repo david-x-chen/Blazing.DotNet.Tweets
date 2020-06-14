@@ -11,8 +11,8 @@ namespace Blazing.DotNet.Tweets.Server.Services
 
         public SentimentService()
         {
-            var model = _context.Model.Load(File.Open(@".\SentimentModel.zip", FileMode.Open));
-            _predictionEngine = model.CreatePredictionEngine<Sentiment, Prediction>(_context);
+            var predictionPipeline = _context.Model.Load(@"./SentimentModel.zip", out _);
+            _predictionEngine = _context.Model.CreatePredictionEngine<Sentiment, Prediction>(predictionPipeline);
         }
 
         public Prediction Predict(string text)

@@ -17,6 +17,8 @@ namespace Blazing.DotNet.Tweets.Server.Extensions
         {
             services.AddSignalR(options => options.KeepAliveInterval = TimeSpan.FromSeconds(5));
 
+            Console.WriteLine(configuration["Authentication:Twitter:ConsumerKey"]);
+
             Auth.SetUserCredentials(
                 configuration["Authentication:Twitter:ConsumerKey"],
                 configuration["Authentication:Twitter:ConsumerSecret"],
