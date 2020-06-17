@@ -33,11 +33,11 @@ namespace Blazing.DotNet.Tweets.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBlazorDebugging();
+                app.UseWebAssemblyDebugging();
             }
 
             app.UseStaticFiles();
-            app.UseClientSideBlazorFiles<Client.Program>();
+            app.UseBlazorFrameworkFiles();
 
             app.UseRouting();
 
@@ -45,7 +45,7 @@ namespace Blazing.DotNet.Tweets.Server
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapHub<StreamHub>("/streamHub");
-                endpoints.MapFallbackToClientSideBlazor<Client.Program>("index.html");
+                endpoints.MapFallbackToFile("index.html");
             });
         }
     }
