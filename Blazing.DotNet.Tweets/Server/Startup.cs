@@ -19,6 +19,7 @@ namespace Blazing.DotNet.Tweets.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddServerSideBlazor();
             services.AddResponseCompression(opts => 
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" }));
@@ -37,12 +38,13 @@ namespace Blazing.DotNet.Tweets.Server
             }
 
             app.UseStaticFiles();
-            app.UseBlazorFrameworkFiles();
+            //app.UseBlazorFrameworkFiles();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapBlazorHub();
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapHub<StreamHub>("/streamHub");
                 endpoints.MapFallbackToFile("index.html");
