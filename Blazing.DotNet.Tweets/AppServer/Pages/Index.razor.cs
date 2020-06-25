@@ -32,7 +32,10 @@ namespace Blazing.DotNet.Tweets.AppServer.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Tracks.UnionWith(Configuration["Twitter:Tracks"].Split(";", StringSplitOptions.RemoveEmptyEntries));
+            if (string.IsNullOrEmpty(Configuration["Twitter:Tracks"]))
+            {
+                Tracks.UnionWith(Configuration["Twitter:Tracks"].Split(";", StringSplitOptions.RemoveEmptyEntries));
+            }
 
             _hubConnection = new HubConnectionBuilder()
                 .WithUrl(NavigationManager.ToAbsoluteUri("/streamHub"))

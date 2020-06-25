@@ -15,7 +15,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Extensions
         {
             services.AddSignalR(options => options.KeepAliveInterval = TimeSpan.FromSeconds(5));
 
-            Console.WriteLine($"config{configuration["witter:Tracks"]}");
+            Console.WriteLine($"config{configuration["Twitter:Tracks"]}");
 
             Auth.SetUserCredentials(
                 configuration["Authentication:Twitter:ConsumerKey"],
