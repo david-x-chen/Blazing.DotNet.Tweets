@@ -32,7 +32,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            if (string.IsNullOrEmpty(Configuration["Twitter:Tracks"]))
+            if (!string.IsNullOrEmpty(Configuration["Twitter:Tracks"]))
             {
                 Tracks.UnionWith(Configuration["Twitter:Tracks"].Split(";", StringSplitOptions.RemoveEmptyEntries));
             }
