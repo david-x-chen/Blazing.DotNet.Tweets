@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data/SentimentModel.zip"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data/SentimentModel.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ML" Version="1.5.0"/>
+    <PackageReference Include="TweetinviAPI" Version="4.0.3"/>
+    <PackageReference Include="Microsoft.ML.FastTree" Version="1.5.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.5" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Blazing.DotNet.Tweets.Shared.csproj"/>
+  </ItemGroup>
+</Project>
