@@ -3,16 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazing.DotNet.Tweets.Server", "Blazing.DotNet.Tweets\Server\Blazing.DotNet.Tweets.Server.csproj", "{A19D6AEE-974C-479C-A5C6-AF2BD663AD87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazing.DotNet.Tweets.Server", "Blazing.DotNet.Tweets\Server\Blazing.DotNet.Tweets.Server.csproj", "{A19D6AEE-974C-479C-A5C6-AF2BD663AD87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazing.DotNet.Tweets.Client", "Blazing.DotNet.Tweets\Client\Blazing.DotNet.Tweets.Client.csproj", "{02D5BE64-81D0-4CE1-A2F5-3AA655E4E9AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazing.DotNet.Tweets.Client", "Blazing.DotNet.Tweets\Client\Blazing.DotNet.Tweets.Client.csproj", "{02D5BE64-81D0-4CE1-A2F5-3AA655E4E9AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazing.DotNet.Tweets.Shared", "Blazing.DotNet.Tweets\Shared\Blazing.DotNet.Tweets.Shared.csproj", "{EB326DD0-7B6E-448E-8228-482CF6A8EBCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazing.DotNet.Tweets.Shared", "Blazing.DotNet.Tweets\Shared\Blazing.DotNet.Tweets.Shared.csproj", "{EB326DD0-7B6E-448E-8228-482CF6A8EBCB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FB955093-92AF-432C-B653-BC0A62B8DA49}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazing.DotNet.Tweets.AppServer", "Blazing.DotNet.Tweets.AppServer\Blazing.DotNet.Tweets.AppServer.csproj", "{8021BCC9-D2E7-4E21-B898-3A9F14DACC02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{EB326DD0-7B6E-448E-8228-482CF6A8EBCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB326DD0-7B6E-448E-8228-482CF6A8EBCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB326DD0-7B6E-448E-8228-482CF6A8EBCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8021BCC9-D2E7-4E21-B898-3A9F14DACC02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8021BCC9-D2E7-4E21-B898-3A9F14DACC02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8021BCC9-D2E7-4E21-B898-3A9F14DACC02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8021BCC9-D2E7-4E21-B898-3A9F14DACC02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
