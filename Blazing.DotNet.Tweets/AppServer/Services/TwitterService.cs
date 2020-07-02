@@ -1,5 +1,6 @@
 ﻿using Blazing.DotNet.Tweets.Shared;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,6 +21,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
         readonly IHubContext<T, ITwitterClient> _hubContext;
         readonly ISentimentService _sentimentService;
         readonly IFilteredStream _filteredStream;
+        protected ISet<string> _tracks = new HashSet<string>(StringComparer.OrdinalIgnoreCase){};
 
         static bool IsInitialized = false;
         static readonly object Locker = new object();
@@ -28,14 +30,22 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
             ILogger<TwitterService<T>> logger,
             IHubContext<T, ITwitterClient> hubContext,
             ISentimentService sentimentService,
-            IFilteredStream filteredStream)
+            IFilteredStream filteredStream,
+            IConfiguration configuration)
         {
             _logger = logger;
             _hubContext = hubContext;
             _sentimentService = sentimentService;
             _filteredStream = filteredStream;
 
+            if (!string.IsNullOrEmpty(configuration["Twitter:Tracks"]))
+            {
+                _tracks.UnionWith(configuration["Twitter:Tracks"].Split(";", StringSplitOptions.RemoveEmptyEntries));
+            }
+
             InitializeStream();
+
+            AddTracks(_tracks);
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -185,7 +195,8 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
                     Type = tweet.Type,
                     URL = tweet.URL,
                     Version = tweet.Version,
-                    Width = tweet.Width
+                    Width = tweet.Width,
+                    CreateAt = iTweet.CreatedAt
                 });
         }
 

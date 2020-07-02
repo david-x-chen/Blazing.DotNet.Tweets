@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blazing.DotNet.Tweets.AppServer.Extensions;
 using Blazing.DotNet.Tweets.AppServer.Hubs;
+using Blazing.DotNet.Tweets.AppServer.Services;
+using System;
 
 namespace Blazing.DotNet.Tweets.AppServer
 {
@@ -20,8 +22,14 @@ namespace Blazing.DotNet.Tweets.AppServer
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-                    
+
             services.AddBlazorTwitterServices<StreamHub>(Configuration);
+
+            // services.AddCronJob<MyCronJob3>(c =>
+            // {
+            //     c.TimeZoneInfo = TimeZoneInfo.Local;
+            //     c.CronExpression = @"*/1 * * * *"; // every 5 minutes
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

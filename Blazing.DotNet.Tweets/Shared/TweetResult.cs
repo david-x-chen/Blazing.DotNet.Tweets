@@ -1,4 +1,6 @@
-﻿namespace Blazing.DotNet.Tweets.Shared
+﻿using System;
+
+namespace Blazing.DotNet.Tweets.Shared
 {
     public class TweetResult
     {
@@ -13,5 +15,6 @@
         public string Version { get; set; }
         public string Type { get; set; }
         public string CacheAge { get; set; }
+        public DateTime CreateAt { get; set; }
     }
 }
