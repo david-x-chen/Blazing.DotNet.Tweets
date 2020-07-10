@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Blazing.DotNet.Tweets.AppServer.Services
 {
-    public class MyCronJob3 : CronJobService
+    public class TimeService : CronJobService
     {
-        private readonly ILogger<MyCronJob3> _logger;
+        private readonly ILogger<TimeService> _logger;
 
         private readonly IHubContext<StreamHub, ITwitterClient> _streamHub;
         
-        public MyCronJob3(IScheduleConfig<MyCronJob3> config, ILogger<MyCronJob3> logger, IHubContext<StreamHub, ITwitterClient> streamHub)
+        public TimeService(IScheduleConfig<TimeService> config, ILogger<TimeService> logger, IHubContext<StreamHub, ITwitterClient> streamHub)
             : base(config.CronExpression, config.TimeZoneInfo)
         {
             _logger = logger;
@@ -23,14 +23,14 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("CronJob 3 starts.");
+            _logger.LogInformation("Time service starts.");
  
             return base.StartAsync(cancellationToken);
         }
 
         public override Task DoWork(CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"{DateTime.Now:hh:mm:ss} CronJob 3 is working.");
+            _logger.LogInformation($"{DateTime.Now:hh:mm:ss} Time service is working.");
             
             _logger.LogInformation("Worker running at: {Time}", DateTime.Now);
             _streamHub.Clients.All.TweetReceived(null);
@@ -41,7 +41,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
 
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("CronJob 3 is stopping.");
+            _logger.LogInformation("Time service is stopping.");
             return base.StopAsync(cancellationToken);
         }
     }
