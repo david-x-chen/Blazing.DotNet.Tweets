@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Blazing.DotNet.Tweets.AppServer.Services
 {
-    public interface ITwitterClient
+    public interface IBTwitterClient
     {
         Task TweetReceived(TweetResult tweet);
 

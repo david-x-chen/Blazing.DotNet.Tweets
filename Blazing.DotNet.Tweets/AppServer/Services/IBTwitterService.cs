@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Blazing.DotNet.Tweets.AppServer.Services
 {
-    public interface ITwitterService<T> where T : Hub
+    public interface IBTwitterService<T> where T : Hub
     {
         void RemoveTrack(string track);
 
