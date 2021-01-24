@@ -11,24 +11,24 @@ namespace Blazing.DotNet.Tweets.AppServer.Extensions
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddBlazorTwitterServices<THub>(this IServiceCollection services, IConfiguration configuration)
-            where THub : Hub<ITwitterClient>
+            where THub : Hub<IBTwitterClient>
         {
             services.AddSignalR(options => options.KeepAliveInterval = TimeSpan.FromSeconds(5));
 
             Console.WriteLine($"config{configuration["Twitter:Tracks"]}");
 
-            Auth.SetUserCredentials(
+            var userClient = new TwitterClient(
                 configuration["Authentication:Twitter:ConsumerKey"],
                 configuration["Authentication:Twitter:ConsumerSecret"],
                 configuration["Authentication:Twitter:AccessToken"],
                 configuration["Authentication:Twitter:AccessTokenSecret"]);
 
             return services.AddSingleton<ISentimentService, SentimentService>()
-                           .AddSingleton<ITwitterService<THub>, TwitterService<THub>>()
+                           .AddSingleton<IBTwitterService<THub>, TwitterService<THub>>()
                            .AddHostedService<TwitterService<THub>>()
                            .AddSingleton<IFilteredStream>(_ =>
                            {
-                               var stream = Stream.CreateFilteredStream();
+                               var stream = userClient.Streams.CreateFilteredStream();
                                stream.StallWarnings = true;
 
                                return stream;

@@ -12,9 +12,9 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
     {
         private readonly ILogger<TimeService> _logger;
 
-        private readonly IHubContext<StreamHub, ITwitterClient> _streamHub;
+        private readonly IHubContext<StreamHub, IBTwitterClient> _streamHub;
         
-        public TimeService(IScheduleConfig<TimeService> config, ILogger<TimeService> logger, IHubContext<StreamHub, ITwitterClient> streamHub)
+        public TimeService(IScheduleConfig<TimeService> config, ILogger<TimeService> logger, IHubContext<StreamHub, IBTwitterClient> streamHub)
             : base(config.CronExpression, config.TimeZoneInfo)
         {
             _logger = logger;

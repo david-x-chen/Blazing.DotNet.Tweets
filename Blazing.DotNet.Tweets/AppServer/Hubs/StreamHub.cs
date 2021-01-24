@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Blazing.DotNet.Tweets.AppServer.Hubs
 {
-    public class StreamHub : Hub<ITwitterClient>
+    public class StreamHub : Hub<IBTwitterClient>
     {
-        readonly ITwitterService<StreamHub> _twitterService;
+        readonly IBTwitterService<StreamHub> _twitterService;
 
-        public StreamHub(ITwitterService<StreamHub> twitterService) =>
+        public StreamHub(IBTwitterService<StreamHub> twitterService) =>
             _twitterService = twitterService;
 
         public void RemoveTrack(string track) =>

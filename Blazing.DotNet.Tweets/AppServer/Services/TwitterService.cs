@@ -15,10 +15,10 @@ using Tweetinvi.Streaming;
 
 namespace Blazing.DotNet.Tweets.AppServer.Services
 {
-    public class TwitterService<T> : BackgroundService, ITwitterService<T> where T : Hub<ITwitterClient>
+    public class TwitterService<T> : BackgroundService, IBTwitterService<T> where T : Hub<IBTwitterClient>
     {
         readonly ILogger<TwitterService<T>> _logger;
-        readonly IHubContext<T, ITwitterClient> _hubContext;
+        readonly IHubContext<T, IBTwitterClient> _hubContext;
         readonly ISentimentService _sentimentService;
         readonly IFilteredStream _filteredStream;
         protected ISet<string> _tracks = new HashSet<string>(StringComparer.OrdinalIgnoreCase){};
@@ -28,7 +28,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
 
         public TwitterService(
             ILogger<TwitterService<T>> logger,
-            IHubContext<T, ITwitterClient> hubContext,
+            IHubContext<T, IBTwitterClient> hubContext,
             ISentimentService sentimentService,
             IFilteredStream filteredStream,
             IConfiguration configuration)
@@ -97,7 +97,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
             if (_filteredStream.StreamState != StreamState.Running)
             {
                 _logger.LogInformation("Starting tweet stream.");
-                await _filteredStream.StartStreamMatchingAnyConditionAsync();
+                await _filteredStream.StartMatchingAnyConditionAsync();
             }
         }
 
@@ -106,7 +106,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
             if (_filteredStream.StreamState != StreamState.Pause)
             {
                 _logger.LogInformation("Pausing tweet stream.");
-                _filteredStream.PauseStream();
+                _filteredStream.Pause();
             }
         }
 
@@ -115,7 +115,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
             if (_filteredStream.StreamState != StreamState.Stop)
             {
                 _logger.LogInformation("Stoping tweet stream.");
-                _filteredStream.StopStream();
+                _filteredStream.Stop();
             }
         }
 
@@ -176,7 +176,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
                 }
             }
 
-            var tweet = iTweet.GenerateOEmbedTweet();
+            var tweet = await iTweet.GenerateOEmbedTweetAsync();
             if (tweet is null)
             {
                 return;
@@ -202,8 +202,8 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
 
         async void OnDisconnectedMessageReceived(object sender, DisconnectedEventArgs args)
         {
-            var latestException = ExceptionHandler.GetLastException();
-            var status = $"Twitter stream disconnected, {args.DisconnectMessage}...{latestException?.TwitterDescription}";
+            //var latestException = ExceptionHandler.GetLastException();
+            var status = $"Twitter stream disconnected, {args.DisconnectMessage}...";// {latestException?.TwitterDescription}";
             _logger.LogWarning(status, args);
 
             await SendStatusUpdateAsync(status);
@@ -217,7 +217,7 @@ namespace Blazing.DotNet.Tweets.AppServer.Services
             await SendStatusUpdateAsync(status);
         }
 
-        async void OnStreamStopped(object sender, StreamExceptionEventArgs args)
+        async void OnStreamStopped(object sender, StreamStoppedEventArgs args)
         {
             var disconnectMessage = args.DisconnectMessage?.ToString() ?? "no disconnection reason";
             var errorMessage = args.Exception?.Message ?? "no error (clean stop).";

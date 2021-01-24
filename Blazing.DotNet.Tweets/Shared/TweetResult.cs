@@ -15,6 +15,6 @@ namespace Blazing.DotNet.Tweets.Shared
         public string Version { get; set; }
         public string Type { get; set; }
         public string CacheAge { get; set; }
-        public DateTime CreateAt { get; set; }
+        public DateTimeOffset CreateAt { get; set; }
     }
 }
