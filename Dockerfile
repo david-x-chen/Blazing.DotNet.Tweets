@@ -10,7 +10,7 @@ WORKDIR /app
 
 RUN dotnet restore
 
-WORKDIR /app/src/Blazing.DotNet.Tweets
+WORKDIR /app/src/Blazing.DotNet.Tweets/AppServer
 
 RUN echo ${APP_VER}
 RUN dotnet publish -o /publish -c Release -f net5.0 -r debian.10-x64 /p:Version=$APP_VER /p:InformationalVersion=$APP_VER
